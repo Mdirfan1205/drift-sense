@@ -5,8 +5,6 @@ import numpy as np
 from ai_verify import verify_candidate
 
 
-print("### WIDE FALLBACK localize_ai.py LOADED ###")
-
 
 # ============================================================
 # CONFIGURATION
