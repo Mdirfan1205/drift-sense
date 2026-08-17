@@ -1,0 +1,15 @@
+.venv/
+.venv_clean/
+__pycache__/
+*.pyc
+.env
+
+# Development datasets
+data/dataset/
+data/ai_dataset/
+
+# Development outputs
+results/*.txt
+
+# Experimental backups
+backup_experiments/
