@@ -1,6 +1,4 @@
-# Drift-Sense
-
-AI-Assisted Multi-Scale Localization for Synthetic Semiconductor Pattern Images
+# Drift-Sense: AI-Powered Navigation-Error Recovery for Wafer Inspection Tools
 
 ## 1. Overview
 
