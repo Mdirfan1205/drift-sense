@@ -14,7 +14,7 @@ BASE_DIR = Path(
 
 MODEL_PATH = (
     BASE_DIR
-    / "results"
+    / "models"
     / "drift_sense_cnn_v2.pth"
 )
 
