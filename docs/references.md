@@ -1,90 +1,72 @@
 # Supporting References
 
-This document lists references used to justify the synthetic-data generation,
-augmentation, and image-degradation/noise assumptions used in the Drift-Sense
-project.
+These references support the synthetic-data generation, image augmentation, and SEM image-quality/noise considerations used in the Drift-Sense project.
 
-## Reference 1 — Synthetic SEM Data for Semiconductor Inspection
+## 1. Synthetic SEM Data for Semiconductor Inspection
 
 **Title:** Defect detection in photolithographic patterns using deep learning models trained on synthetic data
 
-**Authors:** [See the journal article for the complete author list]
+**Authors:** See the complete author list in the published article.
 
 **Year:** 2025
 
-**Journal:** Heliyon, Volume 11, Issue 10
+**Journal:** Heliyon, Volume 11, Issue 10, Article e43377
 
 **DOI:** https://doi.org/10.1016/j.heliyon.2025.e43377
 
 **URL:** https://www.sciencedirect.com/science/article/pii/S240584402501761X
 
-**How this reference informed the project:**
+### Relevance to Drift-Sense
 
-The work demonstrates the use of artificially generated SEM images of
-semiconductor line patterns with known defect distributions and automatic
-annotations. This supports the use of synthetic semiconductor imagery when
-large quantities of annotated experimental data are unavailable.
+This work demonstrates the generation of synthetic scanning electron microscopy (SEM) images of semiconductor line patterns with known defect distributions and automatic annotations. It supports the use of synthetic semiconductor images when obtaining large quantities of manually annotated experimental data is difficult.
 
-**Augmentation / synthetic data:**
-- Synthetic semiconductor/SEM images can be used to construct annotated
-  training datasets.
-- Controlled variation of pattern characteristics and defects can increase
-  dataset diversity.
+### Design choice supported
 
-**Noise / image degradation:**
-- The reference motivates the use of realistic synthetic variations rather
-  than relying exclusively on a small set of experimental images.
+* Synthetic semiconductor/SEM image generation
+* Automatic ground-truth annotation
+* Controlled variation of semiconductor pattern appearance
+* Development of deep-learning inspection systems using synthetic training data
 
-**Relevance to Drift-Sense:**
-The Drift-Sense dataset generator follows the same general principle:
-generate semiconductor-pattern image pairs synthetically while retaining
-exact ground-truth coordinates.
+The Drift-Sense dataset generator follows the same general principle by creating synthetic semiconductor image pairs while recording exact ground-truth coordinates.
 
 ---
 
-## Reference 2 — Geometric Augmentation for Semiconductor Inspection
+## 2. Geometric Data Augmentation for Semiconductor Inspection
 
 **Title:** Geometric transformation-based data augmentation on defect classification of segmented images of semiconductor materials using a ResNet50 convolutional neural network
 
+**Authors:** Francisco López de la Rosa, José L. Gómez-Sirvent, Roberto Sánchez-Reolid, Rafael Morales, Antonio Fernández-Caballero
+
 **Year:** 2022
 
-**Journal:** Applied Soft Computing
+**Journal:** Expert Systems with Applications, Volume 206, Article 117731
 
-**DOI:** https://doi.org/10.1016/j.asoc.2022.108473
+**DOI:** https://doi.org/10.1016/j.eswa.2022.117731
 
-**URL:** https://www.sciencedirect.com/science/article/abs/pii/S0957417422010120
+**URL:** https://www.sciencedirect.com/science/article/pii/S0957417422010120
 
-**How this reference informed the project:**
+### Relevance to Drift-Sense
 
-This study evaluates geometric data augmentation for semiconductor-defect
-classification and reports that appropriate augmentation improves CNN
-performance, particularly when the original dataset is imbalanced.
+This study evaluates geometric data-augmentation techniques for semiconductor-defect images and examines their effect on CNN performance. The authors report that appropriate synthetic augmentation can improve performance, particularly when datasets are limited or imbalanced.
 
-**Augmentation:**
-- Geometric transformations are useful for increasing the diversity of
-  semiconductor inspection images.
-- Augmentation can help CNN models generalize across variations in the
-  appearance and orientation of patterns.
+### Design choice supported
 
-**Noise / image degradation:**
-- Although the main focus is geometric augmentation rather than SEM noise,
-  the work supports introducing controlled visual variation during training
-  instead of relying exclusively on a fixed image set.
+* Geometric image augmentation
+* Increasing training-data diversity
+* Controlled transformations of semiconductor inspection images
+* Improving CNN robustness through additional synthetic examples
 
-**Relevance to Drift-Sense:**
-The Drift-Sense synthetic dataset uses controlled transformations and
-appearance variation to expose the CNN verification stage to different
-instances of semiconductor patterns.
+This supports the use of controlled image variation in the Drift-Sense synthetic-data and CNN-verification pipeline.
 
 ---
 
-## Reference 3 — SEM Noise and Charging-Aware Imaging
+## 3. SEM Noise, Signal-to-Noise Ratio, and Charging
 
 **Title:** Deep learning denoising enables rapid SEM imaging under charging conditions for FE SEM, CD SEM, and review SEM
 
 **Authors:** Hyungjoo Park, Beom-Seok Oh, Kuk Jin Jang
 
-**Year:** 2025/2026
+**Year:** 2026
 
 **Journal:** Scientific Reports, Volume 16, Article 3342
 
@@ -92,54 +74,36 @@ instances of semiconductor patterns.
 
 **URL:** https://www.nature.com/articles/s41598-025-33273-3
 
-**How this reference informed the project:**
+### Relevance to Drift-Sense
 
-This work studies SEM imaging under rapid-acquisition and charging-sensitive
-conditions. It discusses the relationship between reduced acquisition time,
-lower signal-to-noise ratio, and SEM image degradation.
+This study investigates SEM imaging under rapid acquisition and charging-sensitive conditions. It describes how shorter acquisition can reduce electron signal and therefore lower signal-to-noise ratio, while longer exposure can increase charging-related image distortion.
 
-**Augmentation:**
-- SEM training and evaluation data should account for acquisition-condition
-  variability when robustness to real imaging conditions is important.
+### Design choice supported
 
-**Noise modeling:**
-- Rapid SEM acquisition can produce noisier images because of reduced
-  electron signal.
-- Charging can produce image distortion, local wash-out/saturation, and
-  edge-related artifacts.
-- Image quality can vary with acquisition conditions such as beam alignment,
-  focus, accelerating voltage, and other instrument settings.
+* SEM image-quality variability
+* Noise and signal-to-noise considerations
+* Acquisition-related image degradation
+* Charging-related distortion
+* Importance of robustness to SEM imaging conditions
 
-**Image degradation assumptions:**
-- The reference supports treating SEM image quality as dependent on realistic
-  acquisition conditions rather than assuming an ideal noise-free image.
-- It also emphasizes preserving geometric/structural fidelity when evaluating
-  SEM image processing systems.
-
-**Relevance to Drift-Sense:**
-These observations motivate controlled image-quality and degradation
-variation in the synthetic semiconductor image-generation pipeline and
-support evaluating localization using images that are not assumed to be
-perfectly noise-free.
+These observations support considering realistic image-quality variation when developing synthetic semiconductor inspection data and evaluating image-localization systems.
 
 ---
 
-## Summary of How the References Were Used
+## Reference-to-Project Mapping
 
-| Project Component | Supporting Reference |
-|---|---|
-| Synthetic semiconductor image generation | Reference 1 |
-| Semiconductor image augmentation | Reference 2 |
-| Geometric variation / augmentation | Reference 2 |
-| SEM noise considerations | Reference 3 |
-| Charging / acquisition-related degradation | Reference 3 |
-| Need for realistic synthetic training data | References 1 and 3 |
+| Drift-Sense component                       | Supporting reference |
+| ------------------------------------------- | -------------------- |
+| Synthetic semiconductor image generation    | Reference 1          |
+| Ground-truth annotation of synthetic images | Reference 1          |
+| Image augmentation / controlled variation   | Reference 2          |
+| CNN training-data diversity                 | Reference 2          |
+| SEM noise and SNR considerations            | Reference 3          |
+| SEM acquisition-related degradation         | Reference 3          |
+| Charging-related image distortion           | Reference 3          |
 
-## Citation Note
+## Citation Consistency
 
-These references are provided as supporting technical literature for the
-synthetic-data, augmentation, and image-degradation assumptions used in
-Drift-Sense.
+These references are provided as technical support for the synthetic-data, augmentation, and SEM image-quality considerations used in Drift-Sense.
 
-The references should also be cited consistently in the project
-presentation/PPT where these design choices are discussed.
+The presentation should cite the same references wherever these design choices are discussed.
